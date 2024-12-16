@@ -163,5 +163,9 @@ struct EditBookView: View {
 }
 
 #Preview {
-  EditBookView(book: Book.MOCK.first!)
+  let preview = Preview(Book.self)
+  return NavigationStack {
+    EditBookView(book: Book.MOCK.first!)
+      .modelContainer(preview.container)
+  }
 }

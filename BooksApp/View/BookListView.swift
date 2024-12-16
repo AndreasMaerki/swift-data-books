@@ -72,5 +72,8 @@ struct BookListView: View {
 }
 
 #Preview {
-  BookListView()
+  let preview = Preview(Book.self)
+  preview.addExamples(Book.MOCK)
+  return BookListView()
+    .modelContainer(preview.container)
 }
