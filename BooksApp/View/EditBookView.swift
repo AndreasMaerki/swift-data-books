@@ -19,7 +19,7 @@ struct EditBookView: View {
     _dateCompleted = .init(initialValue: book.dateCompleted)
     _summary = .init(initialValue: book.summary)
     _rating = .init(initialValue: book.rating)
-    _status = .init(initialValue: book.status)
+    _status = .init(initialValue: Status(rawValue: book.status)!)
     self.book = book
   }
 
@@ -27,7 +27,7 @@ struct EditBookView: View {
     book.title != title || book.author != author || book.dateAdded != dateAdded
       || book.dateStarted != dateStarted || book.dateCompleted != dateCompleted
       || book.summary != summary || book.rating != rating
-      || book.status != status
+      || book.status != status.rawValue
   }
 
   var body: some View {
@@ -158,7 +158,7 @@ struct EditBookView: View {
     book.dateCompleted = dateCompleted
     book.summary = summary
     book.rating = rating
-    book.status = status
+    book.status = status.rawValue
   }
 }
 
