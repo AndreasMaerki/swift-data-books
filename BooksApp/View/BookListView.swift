@@ -15,6 +15,7 @@ struct BookListView: View {
   @State var createNewBook = false
   @State private var navPath = NavigationPath()
   @State private var sortOrder = SortOrder.status
+  @State private var filter = ""
 
   var body: some View {
     NavigationStack(path: $navPath) {
@@ -26,7 +27,8 @@ struct BookListView: View {
           }
         }
         .buttonStyle(.bordered)
-        BookList(sortOrder: sortOrder)
+        BookList(sortOrder: sortOrder, filterString: filter)
+          .searchable(text: $filter, prompt: Text("Filter on title or author."))
       }
       .navigationTitle("My Books")
       .toolbar {
