@@ -3,14 +3,21 @@ import SwiftUI
 
 @Model
 class Book: Hashable {
+  @Attribute(.unique)
   var title: String
+
   var author: String
   var dateAdded: Date
   var dateStarted: Date
   var dateCompleted: Date
-  var summary: String
+  // the attribute allows SwiftData to performa lightweight migration.
+  @Attribute(originalName: "summary")
+  var synopsis: String
   var rating: Int?
   var status: Status.RawValue
+  // by initialising a new property right away we allow SwiftData
+  // to perform a lightweight migration automatically
+  var recommendedBy: String = ""
 
   init(
     title: String,
@@ -18,18 +25,20 @@ class Book: Hashable {
     dateAdded: Date = Date.now,
     dateStarted: Date = .distantPast,
     dateCompleted: Date = .distantPast,
-    summary: String = "",
+    synopsis: String = "",
     rating: Int? = nil,
-    status: Status = .onShelf
+    status: Status = .onShelf,
+    recommendedBy: String = ""
   ) {
     self.title = title
     self.author = author
     self.dateAdded = dateAdded
     self.dateStarted = dateStarted
     self.dateCompleted = dateCompleted
-    self.summary = summary
+    self.synopsis = synopsis
     self.rating = rating
     self.status = status.rawValue
+    self.recommendedBy = recommendedBy
   }
 }
 
@@ -55,7 +64,7 @@ extension Book {
       dateAdded: Date(timeIntervalSince1970: 1_609_459_200), // December 25, 2020
       dateStarted: Date(timeIntervalSince1970: 1_610_064_000), // January 1, 2021
       dateCompleted: Date(timeIntervalSince1970: 1_612_841_600), // February 28, 2021
-      summary: "A dystopian novel about totalitarianism and surveillance.",
+      synopsis: "A dystopian novel about totalitarianism and surveillance.",
       rating: 5,
       status: .completed
     ),
@@ -66,7 +75,7 @@ extension Book {
       dateAdded: Date(timeIntervalSince1970: 1_612_150_400), // February 1, 2021
       dateStarted: Date(timeIntervalSince1970: 1_614_928_000), // March 1, 2021
       dateCompleted: Date.distantPast, // Not completed yet
-      summary: "A story about racial injustice and moral growth.",
+      synopsis: "A story about racial injustice and moral growth.",
       rating: nil,
       status: .inProgress
     ),
@@ -77,7 +86,7 @@ extension Book {
       dateAdded: Date(timeIntervalSince1970: 1_617_612_800), // April 1, 2021
       dateStarted: Date.distantPast, // Not started yet
       dateCompleted: Date.distantPast,
-      summary: "A classic romance novel exploring social status and marriage.",
+      synopsis: "A classic romance novel exploring social status and marriage.",
       rating: nil,
       status: .onShelf
     ),
@@ -88,7 +97,7 @@ extension Book {
       dateAdded: Date(timeIntervalSince1970: 1_619_859_200), // May 1, 2021
       dateStarted: Date(timeIntervalSince1970: 1_620_032_000), // May 3, 2021
       dateCompleted: Date(timeIntervalSince1970: 1_620_377_600), // May 7, 2021
-      summary: "Set in the Jazz Age, it explores themes of decadence and excess.",
+      synopsis: "Set in the Jazz Age, it explores themes of decadence and excess.",
       rating: 4,
       status: .completed
     ),
@@ -99,7 +108,7 @@ extension Book {
       dateAdded: Date(timeIntervalSince1970: 1_625_097_600), // July 1, 2021
       dateStarted: Date(timeIntervalSince1970: 1_625_356_800), // July 4, 2021
       dateCompleted: Date.distantPast, // Not completed yet
-      summary: "A history of human evolution and cultural development.",
+      synopsis: "A history of human evolution and cultural development.",
       rating: nil,
       status: .inProgress
     ),

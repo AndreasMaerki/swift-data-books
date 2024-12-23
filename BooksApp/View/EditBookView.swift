@@ -6,7 +6,7 @@ struct EditBookView: View {
   @State private var dateAdded: Date
   @State private var dateStarted: Date
   @State private var dateCompleted: Date
-  @State private var summary: String
+  @State private var synopsis: String
   @State private var rating: Int?
   @State private var status: Status
   private let book: Book
@@ -17,7 +17,7 @@ struct EditBookView: View {
     _dateAdded = .init(initialValue: book.dateAdded)
     _dateStarted = .init(initialValue: book.dateStarted)
     _dateCompleted = .init(initialValue: book.dateCompleted)
-    _summary = .init(initialValue: book.summary)
+    _synopsis = .init(initialValue: book.synopsis)
     _rating = .init(initialValue: book.rating)
     _status = .init(initialValue: Status(rawValue: book.status)!)
     self.book = book
@@ -26,7 +26,7 @@ struct EditBookView: View {
   private var hasChanged: Bool {
     book.title != title || book.author != author || book.dateAdded != dateAdded
       || book.dateStarted != dateStarted || book.dateCompleted != dateCompleted
-      || book.summary != summary || book.rating != rating
+      || book.synopsis != synopsis || book.rating != rating
       || book.status != status.rawValue
   }
 
@@ -118,9 +118,9 @@ struct EditBookView: View {
             .frame(minWidth: 70, alignment: .leading)
         }
         Divider()
-        Text("Summary:")
+        Text("Synopsis:")
           .foregroundStyle(.secondary)
-        TextEditor(text: $summary)
+        TextEditor(text: $synopsis)
           .padding(4)
           .overlay {
             RoundedRectangle(cornerRadius: 20)
@@ -156,7 +156,7 @@ struct EditBookView: View {
     book.dateAdded = dateAdded
     book.dateStarted = dateStarted
     book.dateCompleted = dateCompleted
-    book.summary = summary
+    book.synopsis = synopsis
     book.rating = rating
     book.status = status.rawValue
   }
