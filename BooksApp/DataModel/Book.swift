@@ -66,7 +66,8 @@ extension Book {
       dateCompleted: Date(timeIntervalSince1970: 1_612_841_600), // February 28, 2021
       synopsis: "A dystopian novel about totalitarianism and surveillance.",
       rating: 5,
-      status: .completed
+      status: .completed,
+      recommendedBy: "Friend"
     ),
 
     Book(
@@ -77,7 +78,8 @@ extension Book {
       dateCompleted: Date.distantPast, // Not completed yet
       synopsis: "A story about racial injustice and moral growth.",
       rating: nil,
-      status: .inProgress
+      status: .inProgress,
+      recommendedBy: ""
     ),
 
     Book(
@@ -88,7 +90,8 @@ extension Book {
       dateCompleted: Date.distantPast,
       synopsis: "A classic romance novel exploring social status and marriage.",
       rating: nil,
-      status: .onShelf
+      status: .onShelf,
+      recommendedBy: "Friend 2"
     ),
 
     Book(
@@ -99,7 +102,8 @@ extension Book {
       dateCompleted: Date(timeIntervalSince1970: 1_620_377_600), // May 7, 2021
       synopsis: "Set in the Jazz Age, it explores themes of decadence and excess.",
       rating: 4,
-      status: .completed
+      status: .completed,
+      recommendedBy: ""
     ),
 
     Book(
@@ -110,7 +114,8 @@ extension Book {
       dateCompleted: Date.distantPast, // Not completed yet
       synopsis: "A history of human evolution and cultural development.",
       rating: nil,
-      status: .inProgress
+      status: .inProgress,
+      recommendedBy: "Friend 3"
     ),
   ]
 }

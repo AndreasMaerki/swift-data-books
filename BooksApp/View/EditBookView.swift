@@ -9,6 +9,7 @@ struct EditBookView: View {
   @State private var synopsis: String
   @State private var rating: Int?
   @State private var status: Status
+  @State private var recommendedBy: String
   private let book: Book
 
   init(book: Book) {
@@ -20,14 +21,20 @@ struct EditBookView: View {
     _synopsis = .init(initialValue: book.synopsis)
     _rating = .init(initialValue: book.rating)
     _status = .init(initialValue: Status(rawValue: book.status)!)
+    _recommendedBy = .init(initialValue: book.recommendedBy)
     self.book = book
   }
 
   private var hasChanged: Bool {
-    book.title != title || book.author != author || book.dateAdded != dateAdded
-      || book.dateStarted != dateStarted || book.dateCompleted != dateCompleted
-      || book.synopsis != synopsis || book.rating != rating
+    book.title != title
+      || book.author != author
+      || book.dateAdded != dateAdded
+      || book.dateStarted != dateStarted
+      || book.dateCompleted != dateCompleted
+      || book.synopsis != synopsis
+      || book.rating != rating
       || book.status != status.rawValue
+      || book.recommendedBy != recommendedBy
   }
 
   var body: some View {
@@ -117,6 +124,13 @@ struct EditBookView: View {
             .foregroundStyle(.secondary)
             .frame(minWidth: 70, alignment: .leading)
         }
+        LabeledContent {
+          TextField("", text: $recommendedBy)
+        } label: {
+          Text("Recommended by:")
+            .foregroundStyle(.secondary)
+            .frame(minWidth: 70, alignment: .leading)
+        }
         Divider()
         Text("Synopsis:")
           .foregroundStyle(.secondary)
@@ -159,6 +173,7 @@ struct EditBookView: View {
     book.synopsis = synopsis
     book.rating = rating
     book.status = status.rawValue
+    book.recommendedBy = recommendedBy
   }
 }
 
