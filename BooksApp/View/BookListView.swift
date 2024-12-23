@@ -1,30 +1,32 @@
 import SwiftData
 import SwiftUI
 
+enum SortOrder: String, Identifiable, CaseIterable {
+  case status
+  case title
+  case author
+
+  var id: Self {
+    self
+  }
+}
+
 struct BookListView: View {
-  @Environment(\.modelContext) var context
-  @Query(sort: \Book.title) var books: [Book]
   @State var createNewBook = false
   @State private var navPath = NavigationPath()
+  @State private var sortOrder = SortOrder.status
 
   var body: some View {
     NavigationStack(path: $navPath) {
-      Group {
-        if books.isEmpty {
-          ContentUnavailableView("Enter some books", systemImage: "book.fill")
-        } else {
-          List {
-            ForEach(books) { book in
-              NavigationLink(value: book) {
-                bookEntry(book)
-              }
-            }
-            .onDelete { indexSet in
-              indexSet.forEach { context.delete(books[$0]) }
-            }
+      VStack {
+        Picker("", selection: $sortOrder) {
+          ForEach(SortOrder.allCases) { sortOrder in
+            Text("Sort by \(sortOrder.rawValue)")
+              .tag(sortOrder)
           }
-          .listStyle(.plain)
         }
+        .buttonStyle(.bordered)
+        BookList(sortOrder: sortOrder)
       }
       .navigationTitle("My Books")
       .toolbar {
@@ -41,31 +43,6 @@ struct BookListView: View {
       .sheet(isPresented: $createNewBook) {
         NewBookView()
           .presentationDetents(.init([.medium]))
-      }
-    }
-  }
-
-  private func bookEntry(_ book: Book) -> some View {
-    HStack {
-      book.icon
-      VStack(alignment: .leading) {
-        Text(book.title)
-          .font(.title2)
-        Text(book.author)
-          .foregroundStyle(.secondary)
-        if let rating = book.rating {
-          bookRating(rating)
-        }
-      }
-    }
-  }
-
-  private func bookRating(_ rating: Int) -> some View {
-    HStack {
-      ForEach(1 ..< rating, id: \.self) { _ in
-        Image(systemName: "star.fill")
-          .imageScale(.small)
-          .foregroundColor(.yellow)
       }
     }
   }
