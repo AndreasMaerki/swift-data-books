@@ -18,6 +18,7 @@ class Book: Hashable {
   // by initialising a new property right away we allow SwiftData
   // to perform a lightweight migration automatically
   var recommendedBy: String = ""
+  var quotes: [Quote]?
 
   init(
     title: String,
