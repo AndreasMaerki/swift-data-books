@@ -2,7 +2,7 @@ import SwiftUI
 
 struct QuoteListView: View {
   @Environment(\.modelContext) private var modelContext
-  let book: Book
+  @EnvironmentObject private var viewModel: EditBookViewModel
 
   @State private var text = ""
   @State private var page = ""
@@ -12,13 +12,12 @@ struct QuoteListView: View {
     selectedQuote != nil
   }
 
-
   var body: some View {
     quoteBox
       .padding()
 
     List {
-      let sortedQuotes = book.quotes?.sorted(
+      let sortedQuotes = viewModel.quotes?.sorted(
         using: KeyPathComparator(\Quote.creationDate)
       ) ?? []
 
@@ -44,8 +43,8 @@ struct QuoteListView: View {
         }
       }
       .onDelete { indexSet in
-        indexSet.forEach { index in
-          if let quote = book.quotes?[index] {
+        for index in indexSet {
+          if let quote = viewModel.quotes?[index] {
             modelContext.delete(quote)
           }
         }
@@ -80,7 +79,8 @@ struct QuoteListView: View {
             reset()
           } else {
             let quote = Quote(text: text, page: page.isEmpty ? nil : page)
-            book.quotes?.append(quote)
+            viewModel.quotes?.append(quote)
+            viewModel.updateBook()
             reset()
           }
         }
@@ -106,7 +106,8 @@ struct QuoteListView: View {
   preview.addExamples(books)
 
   return NavigationStack {
-    QuoteListView(book: books[2])
+    QuoteListView()
+      .environmentObject(EditBookViewModel(book: Book.MOCK.first!))
       .modelContainer(preview.container)
   }
 }

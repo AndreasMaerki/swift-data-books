@@ -40,7 +40,8 @@ struct BookListView: View {
         }
       }
       .navigationDestination(for: Book.self) { book in
-        EditBookView(book: book)
+        EditBookView()
+          .environmentObject(EditBookViewModel(book: book))
       }
       .sheet(isPresented: $createNewBook) {
         NewBookView()

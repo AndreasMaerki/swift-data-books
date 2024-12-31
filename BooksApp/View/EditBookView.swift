@@ -1,41 +1,7 @@
 import SwiftUI
 
 struct EditBookView: View {
-  @State private var title: String
-  @State private var author: String
-  @State private var dateAdded: Date
-  @State private var dateStarted: Date
-  @State private var dateCompleted: Date
-  @State private var synopsis: String
-  @State private var rating: Int?
-  @State private var status: Status
-  @State private var recommendedBy: String
-  private let book: Book
-
-  init(book: Book) {
-    _title = .init(initialValue: book.title)
-    _author = .init(initialValue: book.author)
-    _dateAdded = .init(initialValue: book.dateAdded)
-    _dateStarted = .init(initialValue: book.dateStarted)
-    _dateCompleted = .init(initialValue: book.dateCompleted)
-    _synopsis = .init(initialValue: book.synopsis)
-    _rating = .init(initialValue: book.rating)
-    _status = .init(initialValue: Status(rawValue: book.status)!)
-    _recommendedBy = .init(initialValue: book.recommendedBy)
-    self.book = book
-  }
-
-  private var hasChanged: Bool {
-    book.title != title
-      || book.author != author
-      || book.dateAdded != dateAdded
-      || book.dateStarted != dateStarted
-      || book.dateCompleted != dateCompleted
-      || book.synopsis != synopsis
-      || book.rating != rating
-      || book.status != status.rawValue
-      || book.recommendedBy != recommendedBy
-  }
+  @EnvironmentObject private var viewModel: EditBookViewModel
 
   var body: some View {
     VStack {
@@ -43,8 +9,8 @@ struct EditBookView: View {
       VStack {
         boxContent
           .foregroundStyle(.secondary)
-          .onChange(of: status) { oldStatus, newStatus in
-            setNewStatus(newStatus, oldStatus)
+          .onChange(of: viewModel.status) { oldStatus, newStatus in
+            viewModel.setNewStatus(newStatus, oldStatus)
           }
         Divider()
         titleDetails
@@ -52,11 +18,11 @@ struct EditBookView: View {
     }
     .padding()
     .textFieldStyle(.roundedBorder)
-    .navigationTitle(title)
+    .navigationTitle(viewModel.title)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      if hasChanged {
-        Button("Save") { updateBook() }
+      if viewModel.hasChanged {
+        Button("Save") { viewModel.updateBook() }
           .buttonStyle(.borderedProminent)
       }
     }
@@ -66,7 +32,7 @@ struct EditBookView: View {
     HStack {
       Text("Status")
       Spacer()
-      Picker("Status", selection: $status) {
+      Picker("Status", selection: $viewModel.status) {
         ForEach(Status.allCases) { status in
           Text(status.description)
             .tag(status)
@@ -79,22 +45,22 @@ struct EditBookView: View {
 
   private var boxContent: some View {
     GroupBox {
-      switch status {
+      switch viewModel.status {
       case .onShelf:
         LabeledContent {
-          DatePicker("", selection: $dateAdded, displayedComponents: .date)
+          DatePicker("", selection: $viewModel.dateAdded, displayedComponents: .date)
         } label: {
           Text("Date Added")
         }
       case .inProgress:
         LabeledContent {
-          DatePicker("", selection: $dateStarted, in: dateAdded..., displayedComponents: .date)
+          DatePicker("", selection: $viewModel.dateStarted, in: viewModel.dateAdded..., displayedComponents: .date)
         } label: {
           Text("Date Started")
         }
       case .completed:
         LabeledContent {
-          DatePicker("", selection: $dateCompleted, in: dateStarted..., displayedComponents: .date)
+          DatePicker("", selection: $viewModel.dateCompleted, in: viewModel.dateStarted..., displayedComponents: .date)
         } label: {
           Text("Date Completed")
         }
@@ -106,26 +72,26 @@ struct EditBookView: View {
     VStack(alignment: .leading, spacing: 16) {
       Group {
         LabeledContent {
-          RatingsView(maxRating: 5, currentRating: $rating)
+          RatingsView(maxRating: 5, currentRating: $viewModel.rating)
         } label: {
           Text("Rating:")
         }
         LabeledContent {
-          TextField("", text: $title)
+          TextField("", text: $viewModel.title)
         } label: {
           Text("Title:")
             .foregroundStyle(.secondary)
             .frame(minWidth: 70, alignment: .leading)
         }
         LabeledContent {
-          TextField("", text: $author)
+          TextField("", text: $viewModel.author)
         } label: {
           Text("Author:")
             .foregroundStyle(.secondary)
             .frame(minWidth: 70, alignment: .leading)
         }
         LabeledContent {
-          TextField("", text: $recommendedBy)
+          TextField("", text: $viewModel.recommendedBy)
         } label: {
           Text("Recommended by:")
             .foregroundStyle(.secondary)
@@ -134,7 +100,7 @@ struct EditBookView: View {
         Divider()
         Text("Synopsis:")
           .foregroundStyle(.secondary)
-        TextEditor(text: $synopsis)
+        TextEditor(text: $viewModel.synopsis)
           .padding(4)
           .overlay {
             RoundedRectangle(cornerRadius: 20)
@@ -142,9 +108,10 @@ struct EditBookView: View {
               .foregroundStyle(.tertiary)
           }
         NavigationLink {
-          QuoteListView(book: book)
+          QuoteListView()
+            .environmentObject(viewModel)
         } label: {
-          let count = book.quotes?.count ?? 0
+          let count = viewModel.quotes?.count ?? 0
           Label("^[\(count) Quotes](inflect: true)", systemImage: "plus.circle.fill")
         }
         .buttonStyle(.bordered)
@@ -153,43 +120,13 @@ struct EditBookView: View {
       }
     }
   }
-
-  private func setNewStatus(_ newStatus: Status, _ oldStatus: Status) {
-    switch newStatus {
-    case .onShelf:
-      dateStarted = .distantPast
-      dateCompleted = .distantPast
-    case .inProgress:
-      if oldStatus == .completed {
-        dateCompleted = .distantPast
-      } else if oldStatus == .onShelf {
-        dateStarted = .now
-      }
-    case .completed:
-      if oldStatus == .onShelf {
-        dateStarted = dateAdded
-      }
-      dateCompleted = .now
-    }
-  }
-
-  private func updateBook() {
-    book.title = title
-    book.author = author
-    book.dateAdded = dateAdded
-    book.dateStarted = dateStarted
-    book.dateCompleted = dateCompleted
-    book.synopsis = synopsis
-    book.rating = rating
-    book.status = status.rawValue
-    book.recommendedBy = recommendedBy
-  }
 }
 
 #Preview {
   let preview = Preview(Book.self)
   return NavigationStack {
-    EditBookView(book: Book.MOCK.first!)
+    EditBookView()
       .modelContainer(preview.container)
+      .environmentObject(EditBookViewModel(book: Book.MOCK.first!))
   }
 }
