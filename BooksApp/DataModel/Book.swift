@@ -18,6 +18,8 @@ class Book: Hashable {
   // by initialising a new property right away we allow SwiftData
   // to perform a lightweight migration automatically
   var recommendedBy: String = ""
+  // will delete the quotes when the book gets deleted
+  @Relationship(deleteRule: .cascade)
   var quotes: [Quote]?
 
   init(

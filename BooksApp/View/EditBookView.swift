@@ -141,6 +141,15 @@ struct EditBookView: View {
               .stroke(style: StrokeStyle(lineWidth: 0.4))
               .foregroundStyle(.tertiary)
           }
+        NavigationLink {
+          QuoteListView(book: book)
+        } label: {
+          let count = book.quotes?.count ?? 0
+          Label("^[\(count) Quotes](inflect: true)", systemImage: "plus.circle.fill")
+        }
+        .buttonStyle(.bordered)
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        .padding(.horizontal)
       }
     }
   }
