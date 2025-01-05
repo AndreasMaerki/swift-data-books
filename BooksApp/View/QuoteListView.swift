@@ -13,44 +13,12 @@ struct QuoteListView: View {
   }
 
   var body: some View {
-    quoteBox
-      .padding()
+    VStack {
+      quoteBox
+        .padding()
 
-    List {
-      let sortedQuotes = viewModel.quotes?.sorted(
-        using: KeyPathComparator(\Quote.creationDate)
-      ) ?? []
-
-      ForEach(sortedQuotes) { quote in
-        VStack(alignment: .leading) {
-          Text(quote.creationDate, format: .dateTime.day().month().year())
-            .font(.caption)
-            .foregroundStyle(.secondary)
-          Text(quote.text)
-
-          HStack {
-            Spacer()
-            if let page = quote.page, !page.isEmpty {
-              Text("Page: \(page)")
-            }
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          selectedQuote = quote
-          text = quote.text
-          page = quote.page ?? ""
-        }
-      }
-      .onDelete { indexSet in
-        for index in indexSet {
-          if let quote = viewModel.quotes?[index] {
-            modelContext.delete(quote)
-          }
-        }
-      }
+      quotesList
     }
-    .listStyle(.plain)
     .navigationTitle("Quotes")
   }
 
@@ -91,6 +59,44 @@ struct QuoteListView: View {
         .border(.tertiary)
         .frame(height: 100)
     }
+  }
+
+  private var quotesList: some View {
+    List {
+      let sortedQuotes = viewModel.quotes?.sorted(
+        using: KeyPathComparator(\Quote.creationDate)
+      ) ?? []
+
+      ForEach(sortedQuotes) { quote in
+        VStack(alignment: .leading) {
+          Text(quote.creationDate, format: .dateTime.day().month().year())
+            .font(.caption)
+            .foregroundStyle(.secondary)
+          Text(quote.text)
+
+          HStack {
+            Spacer()
+            if let page = quote.page, !page.isEmpty {
+              Text("Page: \(page)")
+            }
+          }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+          selectedQuote = quote
+          text = quote.text
+          page = quote.page ?? ""
+        }
+      }
+      .onDelete { indexSet in
+        for index in indexSet {
+          if let quote = viewModel.quotes?[index] {
+            modelContext.delete(quote)
+          }
+        }
+      }
+    }
+    .listStyle(.plain)
   }
 
   private func reset() {

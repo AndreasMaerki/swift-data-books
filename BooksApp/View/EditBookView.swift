@@ -2,7 +2,6 @@ import SwiftUI
 
 struct EditBookView: View {
   @EnvironmentObject private var viewModel: EditBookViewModel
-
   var body: some View {
     VStack {
       statusSelector
@@ -107,16 +106,24 @@ struct EditBookView: View {
               .stroke(style: StrokeStyle(lineWidth: 0.4))
               .foregroundStyle(.tertiary)
           }
-        NavigationLink {
-          QuoteListView()
-            .environmentObject(viewModel)
-        } label: {
-          let count = viewModel.quotes?.count ?? 0
-          Label("^[\(count) Quotes](inflect: true)", systemImage: "plus.circle.fill")
+        HStack {
+          NavigationLink {
+            GenresView()
+              .environmentObject(viewModel)
+          } label: {
+            Label("Genre", systemImage: "bookmark.fill")
+          }
+
+          NavigationLink {
+            QuoteListView()
+              .environmentObject(viewModel)
+          } label: {
+            let count = viewModel.quotes?.count ?? 0
+            Label("^[\(count) Quotes](inflect: true)", systemImage: "plus.circle.fill")
+          }
         }
-        .buttonStyle(.bordered)
         .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.horizontal)
+        .buttonStyle(.bordered)
       }
     }
   }

@@ -11,6 +11,7 @@ class EditBookViewModel: ObservableObject {
   @Published var status: Status
   @Published var recommendedBy: String
   @Published var quotes: [Quote]?
+  @Published var genres: [Genre]?
   private var book: Book
 
   init(book: Book) {
@@ -24,6 +25,7 @@ class EditBookViewModel: ObservableObject {
     status = Status(rawValue: book.status)!
     recommendedBy = book.recommendedBy
     quotes = book.quotes
+    genres = book.genres
     self.book = book
   }
 
@@ -37,6 +39,7 @@ class EditBookViewModel: ObservableObject {
       || book.rating != rating
       || book.status != status.rawValue
       || book.recommendedBy != recommendedBy
+      || book.genres != genres
   }
 
   func updateBook() {
@@ -50,6 +53,7 @@ class EditBookViewModel: ObservableObject {
     book.status = status.rawValue
     book.recommendedBy = recommendedBy
     book.quotes = quotes
+    book.genres = genres
   }
 
   func setNewStatus(_ newStatus: Status, _ oldStatus: Status) {
