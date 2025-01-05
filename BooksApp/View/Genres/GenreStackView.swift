@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct GenreStackView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  var genres: [Genre]
+  var body: some View {
+    ScrollView(.horizontal, showsIndicators: false) {
+      HStack {
+        ForEach(genres.sorted(using: KeyPathComparator(\Genre.name))) { genre in
+          Text(genre.name)
+            .font(.caption)
+            .foregroundStyle(.white)
+            .padding(4)
+            .background {
+              RoundedRectangle(cornerRadius: 4)
+                .fill(genre.hexColor)
+            }
+        }
+      }
     }
+  }
 }
 
 #Preview {
-    GenreStackView()
+  GenreStackView(genres: Genre.MOCK)
 }

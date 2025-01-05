@@ -54,6 +54,9 @@ struct BookList: View {
         if let rating = book.rating {
           bookRating(rating)
         }
+        if let genres = book.genres {
+          GenreStackView(genres: genres)
+        }
       }
     }
   }

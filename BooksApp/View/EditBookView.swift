@@ -106,6 +106,9 @@ struct EditBookView: View {
               .stroke(style: StrokeStyle(lineWidth: 0.4))
               .foregroundStyle(.tertiary)
           }
+        if let genres = viewModel.genres {
+          GenreStackView(genres: genres)
+        }
         HStack {
           NavigationLink {
             GenresView()

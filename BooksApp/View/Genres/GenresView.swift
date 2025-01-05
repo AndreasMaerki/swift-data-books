@@ -59,6 +59,19 @@ struct GenresView: View {
           Text(genre.name)
         }
       }
+      .onDelete { indexSet in
+        indexSet.forEach { index in
+          if let bookGenres = viewModel.genres,
+              bookGenres.contains(genres[index]),
+             let bookGenresIndex = bookGenres.firstIndex(where: {
+               $0.id == genres[index].id
+             })
+          {
+            viewModel.genres?.remove(at: bookGenresIndex)
+          }
+          context.delete(genres[index])
+        }
+      }
       LabeledContent {
         Button {
           createNewGenre.toggle()
