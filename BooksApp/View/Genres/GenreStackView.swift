@@ -1,10 +1,3 @@
-//
-//  GenreStackView.swift
-//  BooksApp
-//
-//  Created by Andreas Maerki on 05.01.2025.
-//
-
 import SwiftUI
 
 struct GenreStackView: View {

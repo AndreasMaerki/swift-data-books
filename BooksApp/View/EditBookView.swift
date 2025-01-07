@@ -122,7 +122,7 @@ struct EditBookView: View {
               .environmentObject(viewModel)
           } label: {
             let count = viewModel.quotes?.count ?? 0
-            Label("^[\(count) Quotes](inflect: true)", systemImage: "plus.circle.fill")
+            Label("\(count) Quotes", systemImage: "plus.circle.fill")
           }
         }
         .frame(maxWidth: .infinity, alignment: .trailing)

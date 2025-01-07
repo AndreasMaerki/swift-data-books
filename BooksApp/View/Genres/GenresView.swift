@@ -60,9 +60,9 @@ struct GenresView: View {
         }
       }
       .onDelete { indexSet in
-        indexSet.forEach { index in
+        for index in indexSet {
           if let bookGenres = viewModel.genres,
-              bookGenres.contains(genres[index]),
+             bookGenres.contains(genres[index]),
              let bookGenresIndex = bookGenres.firstIndex(where: {
                $0.id == genres[index].id
              })

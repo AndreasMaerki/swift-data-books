@@ -1,0 +1,426 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%lld Quotes" : {
+      "localizations" : {
+        "de-CH" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Zitat"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Zitate"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Quote"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Quotes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "author" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autor"
+          }
+        }
+      }
+    },
+    "Author" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autor"
+          }
+        }
+      }
+    },
+    "Author:" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autor:"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        }
+      }
+    },
+    "completed" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "gelesen"
+          }
+        }
+      }
+    },
+    "Create" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellen"
+          }
+        }
+      }
+    },
+    "Create Genre" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genre Hinzufügen"
+          }
+        }
+      }
+    },
+    "Create new Genre" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Genre erstellen"
+          }
+        }
+      }
+    },
+    "Date Added" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzugefügt am"
+          }
+        }
+      }
+    },
+    "Date Completed" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beendet am"
+          }
+        }
+      }
+    },
+    "Date Started" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestartet am"
+          }
+        }
+      }
+    },
+    "Enter some books" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Füge ein paar Bücher hinzu"
+          }
+        }
+      }
+    },
+    "Filter on title or author." : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtere nach Titel oder Autor."
+          }
+        }
+      }
+    },
+    "Genre" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genre"
+          }
+        }
+      }
+    },
+    "in progress" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "am lesen"
+          }
+        }
+      }
+    },
+    "My Books" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meine Bücher"
+          }
+        }
+      }
+    },
+    "name" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "name"
+          }
+        }
+      }
+    },
+    "New Book" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Buch"
+          }
+        }
+      }
+    },
+    "New Genre" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Genre"
+          }
+        }
+      }
+    },
+    "on shelf" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "im Regal"
+          }
+        }
+      }
+    },
+    "Page" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seite"
+          }
+        }
+      }
+    },
+    "Page #" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seite #"
+          }
+        }
+      }
+    },
+    "Page: %@" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seite %@"
+          }
+        }
+      }
+    },
+    "Quotes" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zitate"
+          }
+        }
+      }
+    },
+    "Rating:" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewertung"
+          }
+        }
+      }
+    },
+    "Recommended by:" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empfohlen von:"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        }
+      }
+    },
+    "Set the genre color" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farbe für Genre wählen"
+          }
+        }
+      }
+    },
+    "Sort by %@" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sortieren nach %@"
+          }
+        }
+      }
+    },
+    "status" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status"
+          }
+        }
+      }
+    },
+    "Status" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status"
+          }
+        }
+      }
+    },
+    "Synopsis:" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synopsis"
+          }
+        }
+      }
+    },
+    "title" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel"
+          }
+        }
+      }
+    },
+    "Title" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel"
+          }
+        }
+      }
+    },
+    "Title:" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titel:"
+          }
+        }
+      }
+    },
+    "Update" : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updaten"
+          }
+        }
+      }
+    },
+    "You need to create some genres first." : {
+      "localizations" : {
+        "de-CH" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du musst erst ein paar Genres erzeugen."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

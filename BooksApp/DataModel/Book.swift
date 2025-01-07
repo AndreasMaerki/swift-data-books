@@ -134,7 +134,7 @@ enum Status: Int, Codable, Identifiable, CaseIterable {
     self
   }
 
-  var description: String {
+  var description: LocalizedStringResource {
     switch self {
     case .onShelf:
       "on shelf"

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C0360FDD2D2AEBB000319439 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C0360FDC2D2AEBB000319439 /* Localizable.xcstrings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C031BCBB2D004DCC00886AE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		C031BCAA2D004DC800886AE5 /* BooksApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BooksApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C031BCBA2D004DCC00886AE5 /* BooksAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BooksAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C031BCC42D004DCC00886AE5 /* BooksAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BooksAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0360FDC2D2AEBB000319439 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		C031BCA12D004DC800886AE5 = {
 			isa = PBXGroup;
 			children = (
+				C0360FDC2D2AEBB000319439 /* Localizable.xcstrings */,
 				C031BCAC2D004DC800886AE5 /* BooksApp */,
 				C031BCBD2D004DCC00886AE5 /* BooksAppTests */,
 				C031BCC72D004DCC00886AE5 /* BooksAppUITests */,
@@ -192,6 +198,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"de-CH",
 			);
 			mainGroup = C031BCA12D004DC800886AE5;
 			minimizedProjectReferenceProxies = 1;
@@ -212,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0360FDD2D2AEBB000319439 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +336,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -384,6 +393,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

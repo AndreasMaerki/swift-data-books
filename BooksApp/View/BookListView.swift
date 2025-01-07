@@ -1,7 +1,7 @@
 import SwiftData
 import SwiftUI
 
-enum SortOrder: String, Identifiable, CaseIterable {
+enum SortOrder: LocalizedStringResource, Identifiable, CaseIterable {
   case status
   case title
   case author
