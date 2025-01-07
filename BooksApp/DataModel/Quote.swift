@@ -4,7 +4,7 @@ import SwiftData
 @Model
 class Quote {
   var creationDate = Date.now
-  var text: String
+  var text: String = ""
   var page: String?
   var book: Book?
 

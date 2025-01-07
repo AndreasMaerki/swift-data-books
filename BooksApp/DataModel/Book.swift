@@ -3,18 +3,16 @@ import SwiftUI
 
 @Model
 class Book: Hashable {
-  @Attribute(.unique)
-  var title: String
-
-  var author: String
-  var dateAdded: Date
-  var dateStarted: Date
-  var dateCompleted: Date
+  var title: String = ""
+  var author: String = ""
+  var dateAdded: Date = Date.now
+  var dateStarted: Date = Date.distantPast
+  var dateCompleted: Date = Date.distantPast
   // the attribute allows SwiftData to performa lightweight migration.
   @Attribute(originalName: "summary")
-  var synopsis: String
+  var synopsis: String = ""
   var rating: Int?
-  var status: Status.RawValue
+  var status: Status.RawValue = Status.onShelf.rawValue
   // by initialising a new property right away we allow SwiftData
   // to perform a lightweight migration automatically
   var recommendedBy: String = ""
