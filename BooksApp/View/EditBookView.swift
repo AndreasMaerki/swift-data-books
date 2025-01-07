@@ -3,26 +3,28 @@ import SwiftUI
 struct EditBookView: View {
   @EnvironmentObject private var viewModel: EditBookViewModel
   var body: some View {
-    VStack {
-      statusSelector
+    ScrollView(showsIndicators: false) {
       VStack {
-        boxContent
-          .foregroundStyle(.secondary)
-          .onChange(of: viewModel.status) { oldStatus, newStatus in
-            viewModel.setNewStatus(newStatus, oldStatus)
-          }
-        Divider()
-        titleDetails
+        statusSelector
+        VStack {
+          boxContent
+            .foregroundStyle(.secondary)
+            .onChange(of: viewModel.status) { oldStatus, newStatus in
+              viewModel.setNewStatus(newStatus, oldStatus)
+            }
+          Divider()
+          titleDetails
+        }
       }
-    }
-    .padding()
-    .textFieldStyle(.roundedBorder)
-    .navigationTitle(viewModel.title)
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      if viewModel.hasChanged {
-        Button("Save") { viewModel.updateBook() }
-          .buttonStyle(.borderedProminent)
+      .padding()
+      .textFieldStyle(.roundedBorder)
+      .navigationTitle(viewModel.title)
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        if viewModel.hasChanged {
+          Button("Save") { viewModel.updateBook() }
+            .buttonStyle(.borderedProminent)
+        }
       }
     }
   }
