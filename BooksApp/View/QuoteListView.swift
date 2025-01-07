@@ -90,7 +90,8 @@ struct QuoteListView: View {
       }
       .onDelete { indexSet in
         for index in indexSet {
-          if let quote = viewModel.quotes?[index] {
+          let quote = sortedQuotes[index]
+          if let hasQuote = viewModel.quotes?.contains([quote]), hasQuote {
             modelContext.delete(quote)
           }
         }
