@@ -1,7 +1,12 @@
+import PhotosUI
 import SwiftUI
 
 struct EditBookView: View {
   @EnvironmentObject private var viewModel: EditBookViewModel
+
+  @State private var selectedBookCover: PhotosPickerItem?
+  @State private var selectedBookCoverData: Data?
+
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack {
@@ -24,6 +29,11 @@ struct EditBookView: View {
         if viewModel.hasChanged {
           Button("Save") { viewModel.updateBook() }
             .buttonStyle(.borderedProminent)
+        }
+      }
+      .task(id: selectedBookCover) {
+        if let data = try? await selectedBookCover?.loadTransferable(type: Data.self) {
+          selectedBookCoverData = data
         }
       }
     }
@@ -72,24 +82,24 @@ struct EditBookView: View {
   private var titleDetails: some View {
     VStack(alignment: .leading, spacing: 16) {
       Group {
-        LabeledContent {
-          RatingsView(maxRating: 5, currentRating: $viewModel.rating)
-        } label: {
-          Text("Rating:")
-        }
-        LabeledContent {
-          TextField("", text: $viewModel.title)
-        } label: {
-          Text("Title:")
-            .foregroundStyle(.secondary)
-            .frame(minWidth: 70, alignment: .leading)
-        }
-        LabeledContent {
-          TextField("", text: $viewModel.author)
-        } label: {
-          Text("Author:")
-            .foregroundStyle(.secondary)
-            .frame(minWidth: 70, alignment: .leading)
+        HStack {
+          bookCoverPicker
+          VStack {
+            LabeledContent {
+              TextField("", text: $viewModel.title)
+            } label: {
+              Text("Title:")
+                .foregroundStyle(.secondary)
+                .frame(minWidth: 70, alignment: .leading)
+            }
+            LabeledContent {
+              TextField("", text: $viewModel.author)
+            } label: {
+              Text("Author:")
+                .foregroundStyle(.secondary)
+                .frame(minWidth: 70, alignment: .leading)
+            }
+          }
         }
         LabeledContent {
           TextField("", text: $viewModel.recommendedBy)
@@ -97,6 +107,11 @@ struct EditBookView: View {
           Text("Recommended by:")
             .foregroundStyle(.secondary)
             .frame(minWidth: 70, alignment: .leading)
+        }
+        LabeledContent {
+          RatingsView(maxRating: 5, currentRating: $viewModel.rating)
+        } label: {
+          Text("Rating:")
         }
         Divider()
         Text("Synopsis:")
@@ -129,6 +144,41 @@ struct EditBookView: View {
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
         .buttonStyle(.bordered)
+      }
+    }
+  }
+
+  private var bookCoverPicker: some View {
+    PhotosPicker(
+      selection: $selectedBookCover,
+      matching: .images,
+      photoLibrary: .shared()
+    ) {
+      Group {
+        if let selectedBookCoverData,
+           let uiImage = UIImage(data: selectedBookCoverData)
+        {
+          Image(uiImage: uiImage)
+            .resizable()
+            .scaledToFit()
+        } else {
+          Image(systemName: "photo")
+            .resizable()
+            .scaledToFit()
+            .tint(.primary)
+        }
+      }
+      .frame(width: 75, height: 100)
+      .overlay(alignment: .bottomTrailing) {
+        if selectedBookCoverData != nil {
+          Button {
+            selectedBookCover = nil
+            selectedBookCoverData = nil
+          } label: {
+            Image(systemName: "x.circle.fill")
+              .foregroundStyle(.red)
+          }
+        }
       }
     }
   }
