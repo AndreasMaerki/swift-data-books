@@ -21,6 +21,9 @@ class Book: Hashable {
   var quotes: [Quote]?
   @Relationship(inverse: \Genre.books)
   var genres: [Genre]?
+  // stores data in a folder and references it from the database.
+  @Attribute(.externalStorage)
+  var bookCover: Data?
 
   init(
     title: String,

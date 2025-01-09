@@ -3,9 +3,7 @@ import SwiftUI
 
 struct EditBookView: View {
   @EnvironmentObject private var viewModel: EditBookViewModel
-
   @State private var selectedBookCover: PhotosPickerItem?
-  @State private var selectedBookCoverData: Data?
 
   var body: some View {
     ScrollView(showsIndicators: false) {
@@ -33,7 +31,7 @@ struct EditBookView: View {
       }
       .task(id: selectedBookCover) {
         if let data = try? await selectedBookCover?.loadTransferable(type: Data.self) {
-          selectedBookCoverData = data
+          viewModel.selectedBookCoverData = data
         }
       }
     }
@@ -155,7 +153,7 @@ struct EditBookView: View {
       photoLibrary: .shared()
     ) {
       Group {
-        if let selectedBookCoverData,
+        if let selectedBookCoverData = viewModel.selectedBookCoverData,
            let uiImage = UIImage(data: selectedBookCoverData)
         {
           Image(uiImage: uiImage)
@@ -170,10 +168,10 @@ struct EditBookView: View {
       }
       .frame(width: 75, height: 100)
       .overlay(alignment: .bottomTrailing) {
-        if selectedBookCoverData != nil {
+        if viewModel.selectedBookCoverData != nil {
           Button {
             selectedBookCover = nil
-            selectedBookCoverData = nil
+            viewModel.selectedBookCoverData = nil
           } label: {
             Image(systemName: "x.circle.fill")
               .foregroundStyle(.red)
