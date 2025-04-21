@@ -28,7 +28,14 @@ struct QuoteListView: View {
         LabeledContent("Page") {
           TextField("Page #", text: $page)
             .autocorrectionDisabled()
-            .textFieldStyle(.roundedBorder)
+            .padding(4)
+            .background(Color(uiColor: .systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 4))
+            .overlay {
+              RoundedRectangle(cornerRadius: 4)
+                .stroke(style: StrokeStyle(lineWidth: 1))
+                .foregroundStyle(.quinary.opacity(0.5))
+            }
             .frame(width: 150)
           Spacer()
         }
@@ -42,22 +49,23 @@ struct QuoteListView: View {
 
         Button(isEditing ? "Update" : "Create") {
           if isEditing {
-            selectedQuote?.text = text
-            selectedQuote?.page = page.isEmpty ? nil : page
-            reset()
+            updateQuote()
           } else {
-            let quote = Quote(text: text, page: page.isEmpty ? nil : page)
-            viewModel.quotes?.append(quote)
-            viewModel.updateBook()
-            reset()
+            createQuote()
           }
         }
         .buttonStyle(.borderedProminent)
         .disabled(text.isEmpty)
       }
       TextEditor(text: $text)
-        .border(.tertiary)
+        .cornerRadius(8)
         .frame(height: 100)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .overlay {
+          RoundedRectangle(cornerRadius: 8)
+            .stroke(style: StrokeStyle(lineWidth: 1))
+            .foregroundStyle(.quinary.opacity(0.5))
+        }
     }
   }
 
@@ -100,6 +108,19 @@ struct QuoteListView: View {
     .listStyle(.plain)
   }
 
+  private func updateQuote() {
+    selectedQuote?.text = text
+    selectedQuote?.page = page.isEmpty ? nil : page
+    reset()
+  }
+
+  private func createQuote() {
+    let quote = Quote(text: text, page: page.isEmpty ? nil : page)
+    viewModel.quotes?.append(quote)
+    viewModel.updateBook()
+    reset()
+  }
+
   private func reset() {
     text = ""
     page = ""
@@ -107,7 +128,7 @@ struct QuoteListView: View {
   }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
   let preview = Preview(Book.self)
   let books = Book.MOCK
   preview.addExamples(books)

@@ -12,9 +12,7 @@ struct NewBookView: View {
         TextField("Title", text: $title)
         TextField("Author", text: $author)
         Button("Create") {
-          let book = Book(title: title, author: author)
-          context.insert(book)
-          dismiss()
+          createBook()
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
         .buttonStyle(.borderedProminent)
@@ -29,6 +27,12 @@ struct NewBookView: View {
         }
       }
     }
+  }
+
+  private func createBook() {
+    let book = Book(title: title, author: author)
+    context.insert(book)
+    dismiss()
   }
 }
 
