@@ -46,6 +46,8 @@ struct BookList: View {
   private func bookEntry(_ book: Book) -> some View {
     HStack {
       book.icon
+        .font(.title2)
+        .foregroundStyle(.secondary)
       VStack(alignment: .leading) {
         Text(book.title)
           .font(.title2)

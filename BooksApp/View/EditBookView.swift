@@ -165,7 +165,7 @@ struct EditBookView: View {
           Image(systemName: "photo")
             .resizable()
             .scaledToFit()
-            .tint(.primary)
+            .tint(.secondary.opacity(0.8))
         }
       }
       .frame(width: 75, height: 100)
