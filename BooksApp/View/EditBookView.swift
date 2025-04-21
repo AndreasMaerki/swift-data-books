@@ -115,11 +115,13 @@ struct EditBookView: View {
         Text("Synopsis:")
           .foregroundStyle(.secondary)
         TextEditor(text: $viewModel.synopsis)
-          .padding(4)
+          .cornerRadius(8)
+          .frame(height: 100)
+          .clipShape(RoundedRectangle(cornerRadius: 4))
           .overlay {
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(style: StrokeStyle(lineWidth: 0.4))
-              .foregroundStyle(.tertiary)
+            RoundedRectangle(cornerRadius: 8)
+              .stroke(style: StrokeStyle(lineWidth: 0.5))
+              .foregroundStyle(.quaternary)
           }
         if let genres = viewModel.genres {
           GenreStackView(genres: genres)

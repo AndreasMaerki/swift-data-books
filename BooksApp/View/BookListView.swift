@@ -26,7 +26,10 @@ struct BookListView: View {
               .tag(sortOrder)
           }
         }
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .buttonStyle(.bordered)
+
         BookList(sortOrder: sortOrder, filterString: filter)
           .searchable(text: $filter, prompt: Text("Filter on title or author."))
       }
