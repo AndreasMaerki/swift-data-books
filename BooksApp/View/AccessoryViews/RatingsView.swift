@@ -71,9 +71,9 @@ public struct RatingsView: View {
 
   func correctImage(for rating: Int) -> Bool {
     if let currentRating, rating < currentRating {
-      return true
+      true
     } else {
-      return false
+      false
     }
   }
 }
